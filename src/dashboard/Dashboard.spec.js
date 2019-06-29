@@ -105,4 +105,33 @@ describe('Dashboard Component', () => {
 
   });
 
+  it('should show red on close gate from closed display', () => {
+    const mock = jest.fn();
+    const { getByText } = render(<Dashboard toggleClosed={mock} />);
+
+    const closeGateButton = getByText('Close Gate');
+    fireEvent.click(closeGateButton);
+
+    const closedDisplay = getByText('Closed')
+
+    expect(closedDisplay).toHaveClass("red-led");;
+
+  });
+
+  it('should show red on locked gate from locked display ', () => {
+    const mock = jest.fn();
+    const { getByText } = render(<Dashboard toggleClosed={mock} toggleLocked={mock}/>);
+
+    const closeGateButton = getByText('Close Gate');
+    fireEvent.click(closeGateButton);
+
+    const lockGateButton = getByText("Lock Gate");
+    fireEvent.click(lockGateButton);
+
+    const lockedDisplay = getByText('Locked')
+
+    expect(lockedDisplay).toHaveClass("red-led");;
+
+  });
+
 });
