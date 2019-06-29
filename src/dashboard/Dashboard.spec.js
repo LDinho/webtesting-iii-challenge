@@ -13,6 +13,14 @@ describe('Dashboard Component', () => {
     expect(domTree.toJSON()).toMatchSnapshot();
   });
 
+  it("close gate should be enabled on default home page", () => {
+    const { getByText } = render(<Dashboard />);
+
+    const closeGateButton = getByText("Close Gate");
+
+    expect(closeGateButton.textContent).toEqual("Close Gate");
+  })
+
   it("open gate should be disabled when gate is locked", () => {
     const mock = jest.fn();
 
