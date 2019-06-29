@@ -55,4 +55,54 @@ describe('Dashboard Component', () => {
 
   });
 
+  it("displays closed on close button", () => {
+    const mock = jest.fn();
+
+    const { getByText, queryByText } = render(<Dashboard toggleClosed={mock} />);
+
+    const closeGateButton = getByText("Close Gate");
+
+    fireEvent.click(closeGateButton);
+
+    const closedDisplay = queryByText("Closed");
+    expect(closedDisplay.textContent).toEqual("Closed");;
+
+  });
+
+  it("displays locked on locked gate", () => {
+    const mock = jest.fn();
+
+    const { getByText, queryByText } = render(<Dashboard toggleClosed={mock} toggleLocked={mock} />);
+
+    const closeGateButton = getByText("Close Gate");
+
+    fireEvent.click(closeGateButton);
+
+    const lockGateButton = queryByText("Lock Gate");
+    fireEvent.click(lockGateButton);
+
+    const lockedDisplay = getByText("Locked")
+    expect(lockedDisplay.textContent).toEqual("Locked");
+
+  });
+
+  it("displays unlocked when unlocked gate", () => {
+    const mock = jest.fn();
+
+    const { getByText, queryByText } = render(<Dashboard toggleClosed={mock} toggleLocked={mock} />);
+
+    const closeGateButton = getByText("Close Gate");
+
+    fireEvent.click(closeGateButton);
+
+    const lockGateButton = queryByText("Lock Gate");
+    fireEvent.click(lockGateButton);
+
+    const unlockGateButton = getByText("Unlock Gate");
+    fireEvent.click(unlockGateButton);
+    const lockedDisplay = getByText("Unlocked")
+    expect(lockedDisplay.textContent).toEqual("Unlocked");;
+
+  });
+
 });
